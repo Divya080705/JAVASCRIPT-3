@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: white;
+            color: black;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid  white;
+            border-radius: 10px;
+            background-color:whitesmoke;
+        }
+        input, textarea, button {
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid blue;
+        }
+        button {
+            background:blue;
+            color: white;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form Validation</h1>
+    <div class="container">
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name">
+            <span class="error" id="nameError"></span>
+            <br/>
+            <label for="email">Email:</label>
+            <input type="text" id="email" placeholder="Enter your email">
+            <span class="error" id="emailError"></span>
+           <br/>
+            <label for="website">Website:</label>
+            <input type="text" id="website" placeholder="Enter your website">
+            <span class="error" id="websiteError"></span>
+            <br/>
+            <label for="message">Message:</label>
+            <textarea id="message" placeholder="Enter your message"></textarea>
+            <span class="error" id="messageError"></span>
+
+            <button type="button" onclick="validateForm()">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let website = document.getElementById("website").value.trim();
+            let message = document.getElementById("message").value.trim();
+
+            let nameError = document.getElementById("nameError");
+            let emailError = document.getElementById("emailError");
+            let websiteError = document.getElementById("websiteError");
+            let messageError = document.getElementById("messageError");
+
+            nameError.textContent = emailError.textContent = websiteError.textContent = messageError.textContent = "";
+
+            let isValid = true;
+
+            if (name === "") {
+                nameError.textContent = "Name is required.";
+                isValid = false;
+            }
+
+            if (email === "" || !email.includes("@") || !email.includes(".")) {
+                emailError.textContent = "Enter a valid email address.";
+                isValid = false;
+            }
+
+            if (website !== "" && !website.startsWith("http")) {
+                websiteError.textContent = "Enter a valid website URL (starting with http or https).";
+                isValid = false;
+            }
+
+            if (message === "") {
+                messageError.textContent = "Message cannot be empty.";
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Form submitted successfully!");
+            }
+        }
+    </script>
+</body>
+</html>
